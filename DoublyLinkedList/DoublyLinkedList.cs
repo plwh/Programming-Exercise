@@ -106,20 +106,20 @@ namespace DoublyLinkedList
                 head = newNode;
                 tail = head;
             }
-            else if (index == 0) 
+            else if (index == 0)
             {
                 newNode.Prev = head.Prev;
                 newNode.Next = head;
                 head.Prev = newNode;
                 head = newNode;
             }
-            else if (index == count) 
+            else if (index == count)
             {
                 newNode.Prev = tail;
                 tail.Next = newNode;
                 tail = newNode;
             }
-            else 
+            else
             {
                 newNode.Prev = current.Prev;
                 current.Prev = newNode;
@@ -144,7 +144,7 @@ namespace DoublyLinkedList
             }
             if (index == 0)
             {
-                if (count == 1) 
+                if (count == 1)
                 {
                     head = head.Next;
                     tail = null;
@@ -191,7 +191,6 @@ namespace DoublyLinkedList
             return -1;
         }
 
-
         public bool Contains(object item)
         {
             return IndexOf(item) != -1;
@@ -210,7 +209,7 @@ namespace DoublyLinkedList
                 current = current.Next;
             }
         }
-        public void ChangeAtIndex(int index, object newData)
+        public void ChangeDataAtIndex(int index, object newData)
         {
             Node current = head;
             int currentIndex = 0;
@@ -222,7 +221,7 @@ namespace DoublyLinkedList
             current.Data = newData;
         }
 
-        public object GetElement(int index)
+        public object GetElementData(int index)
         {
             Node current = head;
             int currentIndex = 0;
@@ -240,10 +239,27 @@ namespace DoublyLinkedList
         {
             DoublyLinkedList test = new DoublyLinkedList();
             test.InsertAt(0, 1);
-            test.InsertAt(1, 3);
-            test.InsertAt(2, 5);
-            test.RemoveAt(1);
+            test.InsertAt(1, 2);
+            test.Add(3);
+            Console.WriteLine("List elements:");
             test.Print();
+            test.RemoveAt(0);
+            Console.WriteLine("List elements after removing element at index 0:");
+            test.Print();
+            test.InsertAt(2, 4);
+            Console.WriteLine("List elements after inserting an element at index 2(after the last element):");
+            test.Print();
+            Console.WriteLine("List elements after changing element data at index 1 with '5':");
+            test.ChangeDataAtIndex(1, 5);
+            test.Print();
+            Console.WriteLine("List elements after changing element with value '2' to '3':");
+            test.ChangeElementData(2, 3);
+            test.Print();
+            object element = test.GetElementData(1);
+            Console.WriteLine("Value of element at index 1:" + element);
+            Console.WriteLine("Index of element with value 3:{0}", test.IndexOf(3));
+            Console.WriteLine("List contains element with value = '5': {0}", (test.Contains(5)) ? "Yes" : "No");
+            Console.WriteLine("Is list empty? - {0}", (test.IsEmpty) ? "Yes" : "No");
         }
     }
 }
