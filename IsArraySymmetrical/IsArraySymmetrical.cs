@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IsArraySymmetrical
 {
-    class IsArraySymmetrical
+    class Test
     {
         public static bool IsArraySymmetrical(int[] array)
         {
-            for (int i = 0; i < array.Length / 2; i++)
+            for (int i = 0; i < array.Length / 2;i++)
             {
-                if (array[i] != array[array.Length - i - 1])
+                if(array[i] != array[array.Length-i-1])
                 {
                     return false;
                 }

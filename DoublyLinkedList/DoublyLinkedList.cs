@@ -45,6 +45,11 @@ namespace DoublyLinkedList
                 get { return this.prev; }
                 set { this.prev = value; }
             }
+
+            public override string ToString()
+            {
+                return this.Data.ToString();
+            }
         }
         private Node head;
         private Node tail;
@@ -82,64 +87,72 @@ namespace DoublyLinkedList
             count++;
         }
 
-        public void InsertAt(object item, int index)
+        public void InsertAt(int index, object item)
         {
-            count++;
-            if (index >= count || index < 0)
-                throw new ArgumentOutOfRangeException("Index is out of range!");
+            if (index < 0 || index > count)
+                throw new ArgumentOutOfRangeException("Index is out of range");
             Node newNode = new Node(item);
-            int currIndex = 0;
+            int currentIndex = 0;
             Node current = head;
             Node prev = null;
-            while (currIndex < index)
+            while (currentIndex < index)
             {
                 prev = current;
                 current = current.Next;
-                currIndex++;
+                currentIndex++;
             }
-            if (index == 0)
+            if (count == 0)
+            {
+                head = newNode;
+                tail = head;
+            }
+            else if (index == 0) 
             {
                 newNode.Prev = head.Prev;
                 newNode.Next = head;
                 head.Prev = newNode;
                 head = newNode;
             }
-            else if (index == count - 1)
+            else if (index == count) 
             {
                 newNode.Prev = tail;
                 tail.Next = newNode;
                 tail = newNode;
             }
-            else
+            else 
             {
-                newNode.Next = prev.Next;
-                prev.Next = newNode;
                 newNode.Prev = current.Prev;
                 current.Prev = newNode;
+                newNode.Next = prev.Next;
+                prev.Next = newNode;
             }
+            count++;
         }
 
         public void RemoveAt(int index)
         {
-            if (index >= count || index < 0)
-                throw new ArgumentOutOfRangeException("Index is out of range!");
-            int currIndex = 0;
+            if (index < 0 || index >= count)
+                throw new ArgumentOutOfRangeException("Index is out of range");
+            int currentIndex = 0;
             Node current = head;
             Node prev = null;
-            while (currIndex < index)
+            while (currentIndex < index)
             {
                 prev = current;
                 current = current.Next;
-                currIndex++;
+                currentIndex++;
             }
-            if (count == 0)
+            if (index == 0)
             {
-                head = null;
-            }
-            else if (prev == null)
-            {
-                head = current.Next;
-                head.Prev = null;
+                if (count == 1) 
+                {
+                    head = head.Next;
+                    tail = null;
+                }
+                else
+                {
+                    head = head.Next;
+                }
             }
             else if (index == count - 1)
             {
@@ -178,9 +191,47 @@ namespace DoublyLinkedList
             return -1;
         }
 
+
         public bool Contains(object item)
         {
             return IndexOf(item) != -1;
+        }
+
+        public void ChangeElementData(object elementToChange, object newData)
+        {
+            Node current = head;
+            while (current != null)
+            {
+                if (current.Data.Equals(elementToChange))
+                {
+                    current.Data = newData;
+                    break;
+                }
+                current = current.Next;
+            }
+        }
+        public void ChangeAtIndex(int index, object newData)
+        {
+            Node current = head;
+            int currentIndex = 0;
+            while (currentIndex < index)
+            {
+                current = current.Next;
+                currentIndex++;
+            }
+            current.Data = newData;
+        }
+
+        public object GetElement(int index)
+        {
+            Node current = head;
+            int currentIndex = 0;
+            while (currentIndex < index)
+            {
+                current = current.Next;
+                currentIndex++;
+            }
+            return current.Data;
         }
     }
     class Program
@@ -188,9 +239,9 @@ namespace DoublyLinkedList
         static void Main(string[] args)
         {
             DoublyLinkedList test = new DoublyLinkedList();
-            test.Add("Hello");
-            test.Add("World");
-            test.InsertAt("C#", 1);
+            test.InsertAt(0, 1);
+            test.InsertAt(1, 3);
+            test.InsertAt(2, 5);
             test.RemoveAt(1);
             test.Print();
         }

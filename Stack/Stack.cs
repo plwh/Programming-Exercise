@@ -55,7 +55,7 @@ namespace ConsoleApplication1
             }
             else
             {
-                var temp = top;
+                Node temp = top;
                 top = newNode;
                 top.Next = temp;
             }

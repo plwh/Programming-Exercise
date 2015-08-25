@@ -76,6 +76,32 @@ namespace Queue
             return current.Data;
         }
 
+        public object Peek()
+        {
+            return head.Data;
+        }
+
+        public void Clear()
+        { 
+            this.head = null;
+            this.tail = null;
+            this.count = 0;
+        }
+
+        public bool Contains(object item)
+        {
+            Node current = head;
+            for (int i = 0; i < count; i++)
+            {
+                if (current.Data.Equals(item))
+                {
+                    return true;
+                }
+
+                current = current.Next;
+            }
+            return false;
+        }
         public void PrintQueue()
         {
             Node current = head;
@@ -87,7 +113,7 @@ namespace Queue
         }
     }
 
-    class Queue
+    class Test
     {
         static void Main()
         {

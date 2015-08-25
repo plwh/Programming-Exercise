@@ -16,7 +16,7 @@ namespace MethodOverloading
         public void Draw(string str)
         {
             Console.WriteLine(str);
-        }       
+        }
     }
 
     class MethodOverloading
@@ -25,8 +25,8 @@ namespace MethodOverloading
         static void Main(string[] args)
         {
             TestMethods test = new TestMethods();
-            string str = "This is a test";
-            int number = 12;
+            int number = 23;
+            string str = "Hello World!";
             test.Draw(number);
             test.Draw(str);
         }

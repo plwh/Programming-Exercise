@@ -8,17 +8,17 @@ namespace MethodOverride
 {
     public class BC
     {
-        public virtual void Display()
+        public virtual string Display()
         {
-            Console.WriteLine("BC Display");
+            return "Hello";
         }
     }
 
     public class DC : BC
     {
-        public override void Display()
+        public override string Display()
         {
-            Console.WriteLine("DC Display");
+            return base.Display() + " Angel";
         }
     }
 
@@ -28,10 +28,11 @@ namespace MethodOverride
         {
             BC b;
             b = new BC();
-            b.Display();
+            string str = b.Display();
             b = new DC();
-            b.Display();
+            string str1 = b.Display();
+            Console.WriteLine(str);
+            Console.WriteLine(str1);
         }
-        
     }
 }
