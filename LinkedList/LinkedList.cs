@@ -48,6 +48,16 @@ namespace LinkedList
             this.count = 0;
         }
 
+        public int Count
+        {
+            get { return count; }
+        }
+
+        public bool IsEmpty
+        {
+            get { return count == 0; }
+        }
+
         public void Add(object item)
         {
             if (head == null)
@@ -63,10 +73,9 @@ namespace LinkedList
             count++;
         }
 
-        public void InsertAt(object item, int index)
+        public void InsertAt(int index, object item)
         {
-            count++;
-            if (index >= count || index < 0)
+            if (index > count || index < 0)
                 throw new ArgumentOutOfRangeException("Index is out of range");
             Node newNode = new Node(item);
             int currentIndex = 0;
@@ -77,16 +86,21 @@ namespace LinkedList
                 prev = current;
                 current = current.Next;
                 currentIndex++;
+            }       
+            if(count == 0)
+            {
+                head = newNode;
+                tail = head;
             }
-            if (index == 0)
+            else if (index == 0)
             {
                 var temp = head;
                 head = newNode;
                 head.Next = temp;
             }
-            else if (index == count - 1)
+            else if (index == count)
             {
-                prev.Next = newNode;
+                tail.Next = newNode;
                 tail = newNode;
             }
             else
@@ -94,6 +108,7 @@ namespace LinkedList
                 newNode.Next = prev.Next;
                 prev.Next = newNode;
             }
+            count++;
         }
 
         public void RemoveAt(int index)
@@ -111,25 +126,87 @@ namespace LinkedList
                 current = current.Next;
                 currentIndex++;
             }
-            count--;
-            if (count == 0)
+            if (index == 0)
             {
-                head = null;
+                if (count == 1)
+                {
+                    head = head.Next;
+                    tail = null;
+                }
+                else
+                {
+                    head = head.Next;
+                }
             }
-            else if (prev == null)
+            else if (index == count-1)
             {
-                head = current.Next;
+                prev.Next = current.Next;
+                tail = prev;
+                current = null;
             }
-            else 
+            else
             {
                 prev.Next = current.Next;
             }
-            if(object.ReferenceEquals(this.tail, current))
-            {
-                this.tail = prev;
-            }          
+            count--;
         }
 
+        public int IndexOf(object item)
+        {
+            Node current = head;
+            for(int i=0; i < count;i++)
+            {
+                if(current.Data.Equals(item))
+                {
+                    return i;       
+                }
+                current = current.Next;
+            }
+            return -1;
+        }
+
+        public bool Contains(object item)
+        {
+            return IndexOf(item) != -1;
+        }
+
+        public void ChangeElementData(object elementToChange, object newData)
+        {
+            Node current = head;
+            while(current!=null)
+            {
+                if(current.Data.Equals(elementToChange))
+                {
+                    current.Data = newData;
+                    break;
+                }
+                current = current.Next;
+            }
+        }
+
+        public void ChangeDataAtIndex(int index, object newData)
+        {
+            Node current = head;
+            int currentIndex = 0;
+            while(currentIndex < index)
+            {
+                current = current.Next;
+                currentIndex++;
+            }
+            current.Data = newData;
+        }
+
+        public object GetElementData(int index)
+        {
+            Node current = head;
+            int currentIndex = 0;   
+            while(currentIndex < index)
+            {
+                current = current.Next;
+                currentIndex++;
+            }
+            return current.Data;
+        }
         public void Print()
         {
             Node current = head;
@@ -145,12 +222,28 @@ namespace LinkedList
         static void Main()
         {
             LinkedList test = new LinkedList();
-            test.Add("Hello");
-            test.Add("C#");
-            test.Add("World");
-            test.InsertAt("!",3);
-            test.RemoveAt(1);
+            test.InsertAt(0, 1);
+            test.InsertAt(1, 2);
+            test.Add(3);
+            Console.WriteLine("List elements:");
             test.Print();
+            test.RemoveAt(0);
+            Console.WriteLine("List elements after removing element at index 0:");
+            test.Print();
+            test.InsertAt(2, 4);
+            Console.WriteLine("List elements after inserting an element at index 2(after the last element):");
+            test.Print();
+            Console.WriteLine("List elements after changing element data at index 1 with '5':");
+            test.ChangeDataAtIndex(1, 5);
+            test.Print();
+            Console.WriteLine("List elements after changing element with value '2' to '3':");
+            test.ChangeElementData(2, 3);
+            test.Print();
+            object element = test.GetElementData(1);
+            Console.WriteLine("Value of element at index 1:" + element);
+            Console.WriteLine("Index of element with value 3:{0}", test.IndexOf(3));
+            Console.WriteLine("List contains element with value = '5': {0}", (test.Contains(5)) ? "Yes" : "No");
+            Console.WriteLine("Is list empty? - {0}", (test.IsEmpty) ? "Yes" : "No");
         }
     }
 }
