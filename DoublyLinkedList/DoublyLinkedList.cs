@@ -171,6 +171,7 @@ namespace DoublyLinkedList
             count--;
         }
 
+        /*
         public void Remove(object item)
         {
             int currentIndex = 0;
@@ -186,6 +187,44 @@ namespace DoublyLinkedList
                 currentIndex++;
             }
             throw new ArgumentException("There is no such item.");
+        }
+        */
+
+        public void Remove(object item)
+        {
+            Node current = head;
+            Node prev = null;
+            int itemIndex = 0;
+            while (!current.Data.Equals(item))
+            {
+                prev = current;
+                current = current.Next;
+                itemIndex++;
+            }
+            if (itemIndex == 0)
+            {
+                if (count == 1)
+                {
+                    head = null;
+                    tail = null;
+                }
+                else
+                {
+                    head = head.Next;
+                }
+            }
+            else if (itemIndex == count-1)
+            {
+                prev.Next = current.Next;
+                tail = prev;
+                current = null;
+            }
+            else
+            {
+                prev.Next = current.Next;
+                current.Next.Prev = prev;
+            }
+            count--;  
         }
 
         public void Print()
@@ -285,7 +324,7 @@ namespace DoublyLinkedList
             test.ChangeElementData(2, 3);
             test.Print();                 
             Console.WriteLine("List elements after removing element with value '5'");
-            test.Remove(5);
+            test.Remove(4);
             test.Print();
             object element = test.GetElementData(1);
             Console.WriteLine("Value of element at index 1:" + element);
