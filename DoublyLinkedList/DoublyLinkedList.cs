@@ -101,17 +101,20 @@ namespace DoublyLinkedList
                 current = current.Next;
                 currentIndex++;
             }
-            if (count == 0)
+            if (index == 0)
             {
-                head = newNode;
-                tail = head;
-            }
-            else if (index == 0)
-            {
-                newNode.Prev = head.Prev;
-                newNode.Next = head;
-                head.Prev = newNode;
-                head = newNode;
+                if (count == 0)
+                {
+                    this.Add(item);
+                    return;
+                }
+                else
+                {
+                    newNode.Prev = head.Prev;
+                    newNode.Next = head;
+                    head.Prev = newNode;
+                    head = newNode;
+                }
             }
             else if (index == count)
             {
@@ -146,7 +149,7 @@ namespace DoublyLinkedList
             {
                 if (count == 1)
                 {
-                    head = head.Next;
+                    head = null;
                     tail = null;
                 }
                 else
@@ -166,6 +169,23 @@ namespace DoublyLinkedList
                 current.Next.Prev = prev;
             }
             count--;
+        }
+
+        public void Remove(object item)
+        {
+            int currentIndex = 0;
+            Node current = head;
+            while (current != null)
+            {
+                if (current.Data.Equals(item))
+                {
+                    this.RemoveAt(currentIndex);
+                    return;
+                }
+                current = current.Next;
+                currentIndex++;
+            }
+            throw new ArgumentException("There is no such item.");
         }
 
         public void Print()
@@ -193,7 +213,15 @@ namespace DoublyLinkedList
 
         public bool Contains(object item)
         {
-            return IndexOf(item) != -1;
+            Node current = head;
+            while (current != null)
+            {
+                if (current.Data.Equals(item))
+                    return true;
+
+                current = current.Next;
+            }
+            return false;
         }
 
         public void ChangeElementData(object elementToChange, object newData)
@@ -209,6 +237,7 @@ namespace DoublyLinkedList
                 current = current.Next;
             }
         }
+
         public void ChangeDataAtIndex(int index, object newData)
         {
             Node current = head;
@@ -254,6 +283,9 @@ namespace DoublyLinkedList
             test.Print();
             Console.WriteLine("List elements after changing element with value '2' to '3':");
             test.ChangeElementData(2, 3);
+            test.Print();                 
+            Console.WriteLine("List elements after removing element with value '5'");
+            test.Remove(5);
             test.Print();
             object element = test.GetElementData(1);
             Console.WriteLine("Value of element at index 1:" + element);
