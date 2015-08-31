@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -93,16 +93,10 @@ namespace DoublyLinkedList
                 throw new ArgumentOutOfRangeException("Index is out of range");
             Node newNode = new Node(item); // syzdavame elementa, kojto shte vmykvame
             int currentIndex = 0;
-<<<<<<< HEAD
-            Node current = head; // tazi promenliva pazi tekushtiq element
-            Node prev = null; // tazi promenliva pazi predishniq element. Principno moje da se maxne ottuk(kakto i dolu v while-a) 
-            // i da se zameni s current.Prev nasqkude kydeto se sreshta po-dolu. Tova moje da se napravi samo pri dvusvyzaniq 
-            // spisuk zashtoto pri ednosvyrzaniq nqmame Prev, a samo Next
-=======
-            Node current = head; 
-            Node prev = null; // tazi promenliva pazi predishniq element. Principno moje da se maxne ottuk(kakto i dolu v while-a) i da se zameni s current.Prev navsqkude kydeto se sreshta
-            // po-dolu. Tova moje da se napravi samo pri dvusvyzaniq spisuk zashtoto pri ednosvyrzaniq nqmame Prev, a samo Next
->>>>>>> origin/master
+            Node current = head;
+            Node prev = null; // tazi promenliva pazi predishniq element. Principno moje da se maxne ottuk(kakto i dolu v while-a)
+            // i da se zameni s current.Prev navsqkude kydeto se sreshta po-dolu. Tova moje da se napravi samo pri
+            // dvusvyzaniq spisuk zashtoto pri ednosvyrzaniq nqmame Prev, a samo Next
             while (currentIndex < index)
             {
                 /* Ako imame spisyk s elementi 1 2 3 i iskame da vmyknem element na poziciq 1(mejdu 1 i 2)
@@ -115,21 +109,13 @@ namespace DoublyLinkedList
             if (index == 0) // ako poziciqta na koqto iskame da dobavim element e 0 (t.e predi vsichki elementi)
             {
                 if (count == 0) // proverqvame dali spisyka e prazen, ako da dobavqme nov element izpolzvajki metoda napisan
-<<<<<<< HEAD
                 // po-gore(Add) i s return prekratqvame izpylnenieto na InsertAt
-=======
-                                // po-gore(Add) i s return prekratqvame izpylnenieto na InsertAt
->>>>>>> origin/master
                 {
                     this.Add(item);
                     return;
                 }
                 else // ako spisyka ne e bil prazen, a poziiciqta na koqto iskame da dobavim element e 0
-<<<<<<< HEAD
                 // (t.e. predi vsichki elementi) vlizame tuk
-=======
-                     // (t.e. predi vsichki elementi) vlizame tuk
->>>>>>> origin/master
                 {
                     /*  newNode = 4, head = 1
                  *     head.Prev      |             (1)                 (3)     head  |                (4)
@@ -146,11 +132,7 @@ namespace DoublyLinkedList
                 }
             }
             else if (index == count) // ako poziciqta na koqto iskame da dobavim element e ravna na broq na elementite
-<<<<<<< HEAD
             // (t.e sled vsichki elementi) vlizame tuk 
-=======
-                                     // (t.e sled vsichki elementi) vlizame tuk 
->>>>>>> origin/master
             {   /*  newNode = 4, tail = 3
                  *     tail            |       tail newNode.Prev  |                tail
                  *       |             |         |     |          |                 |
@@ -159,15 +141,9 @@ namespace DoublyLinkedList
                  *       tail.Next     |              |           |
                  *                     |          tail.Next       |
                  */
-<<<<<<< HEAD
                 newNode.Prev = tail;
                 tail.Next = newNode;
                 tail = newNode;
-=======
-                newNode.Prev = tail; 
-                tail.Next = newNode; 
-                tail = newNode; 
->>>>>>> origin/master
             }
             else // ako poziciqta e mejdu elementite v spisyka(t.e. nito v nachaloto nito v kraq) vlizame tuk
             {
@@ -203,11 +179,7 @@ namespace DoublyLinkedList
             if (index == 0) // ako poziciqta na koqto iskame da premaxmen element e 0 (t.e 1viq element)
             {
                 if (count == 1) // ako broq na elementite e raven na 1(toest sled premahvane na elementa na nuleva poziciq 
-<<<<<<< HEAD
                 // spisyka stava prazen) vlizame tyk
-=======
-                                // spisyka stava prazen) vlizame tyk
->>>>>>> origin/master
                 {
                     // pravim glavata i opashkata null
                     head = null;
@@ -221,11 +193,7 @@ namespace DoublyLinkedList
                 }
             }
             else if (index == count - 1) // ako poziciqta e v kraq na spisuka(t.e. ako imame spisyk s 2 elementa, 2riq element 
-<<<<<<< HEAD
             // ima index raven na 1, koeto e count-1) vlizame tyk
-=======
-                                         // ima index raven na 1, koeto e count-1) vlizame tyk
->>>>>>> origin/master
             {
                 /*  current = 2, prev = 3, tail = 2
                 *             tail      |     tail = prev                          
@@ -237,11 +205,7 @@ namespace DoublyLinkedList
                 *       prev.Next       |             prev.Next = current.Next            
                 */
                 prev.Next = current.Next; // prev.Next = null - pravi sushtoto
-<<<<<<< HEAD
                 tail = prev;
-=======
-                tail = prev;                       
->>>>>>> origin/master
             }
             else // ako poziciqta e mejdu elementite v spisyka(t.e. nito v nachaloto nito v kraq) vlizame tuk
             {
@@ -285,15 +249,9 @@ namespace DoublyLinkedList
         {
             Node current = head;
             Node prev = null;
-<<<<<<< HEAD
             int itemIndex = 0;
             while (!current.Data.Equals(item)) // Neshtata v while-a se izpylnqvat dokato stoinostta na segashniq element e 
             // razlichna ot tazi na elementa kojto iskame da premahnem 
-=======
-            int itemIndex = 0; 
-            while (!current.Data.Equals(item)) // Neshtata v while-a se izpylnqvat dokato stoinostta na segashniq element e 
-                                               // razlichna ot tazi na elementa kojto iskame da premahnem 
->>>>>>> origin/master
             {
                 prev = current;
                 current = current.Next;
@@ -312,11 +270,7 @@ namespace DoublyLinkedList
                     head.Prev = null;
                 }
             }
-<<<<<<< HEAD
             else if (itemIndex == count - 1)
-=======
-            else if (itemIndex == count-1)
->>>>>>> origin/master
             {
                 prev.Next = current.Next;
                 tail = prev;
@@ -326,7 +280,7 @@ namespace DoublyLinkedList
                 prev.Next = current.Next;
                 current.Next.Prev = prev;
             }
-            count--;  
+            count--;
         }
 
         public void Print()
