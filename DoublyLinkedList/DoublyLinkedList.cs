@@ -378,7 +378,7 @@ namespace DoublyLinkedList
             Console.WriteLine("List elements after changing element with value '2' to '3':");
             test.ChangeElementData(2, 3);
             test.Print();
-            Console.WriteLine("List elements after removing element with value '5'");
+            Console.WriteLine("List elements after removing element with value '4'");
             test.Remove(4);
             test.Print();
             object element = test.GetElementData(1);
