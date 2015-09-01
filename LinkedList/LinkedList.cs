@@ -87,19 +87,16 @@ namespace LinkedList
                 current = current.Next;
                 currentIndex++;
             }       
-            if (index == 0)
+            if(count == 0)
             {
-                if (count == 0)
-                {
-                    this.Add(item);
-                    return;
-                }
-                else
-                {
-                    var temp = head;
-                    head = newNode;
-                    head.Next = temp;
-                }
+                head = newNode;
+                tail = head;
+            }
+            else if (index == 0)
+            {
+                var temp = head;
+                head = newNode;
+                head.Next = temp;
             }
             else if (index == count)
             {
@@ -118,7 +115,7 @@ namespace LinkedList
         {
             if (index >= count || index < 0)
             {
-                throw new ArgumentOutOfRangeException("Index is out of range");
+                throw new ArgumentOutOfRangeException("Index is out of range");   
             }
             int currentIndex = 0;
             Node current = head;
@@ -133,18 +130,19 @@ namespace LinkedList
             {
                 if (count == 1)
                 {
-                    head = null;
+                    head = head.Next;
                     tail = null;
                 }
                 else
                 {
-                    head = current.Next;
+                    head = head.Next;
                 }
             }
-            else if (index == count - 1)
+            else if (index == count-1)
             {
                 prev.Next = current.Next;
                 tail = prev;
+                current = null;
             }
             else
             {
@@ -156,11 +154,11 @@ namespace LinkedList
         public int IndexOf(object item)
         {
             Node current = head;
-            for (int i = 0; i < count; i++)
+            for(int i=0; i < count;i++)
             {
-                if (current.Data.Equals(item))
+                if(current.Data.Equals(item))
                 {
-                    return i;
+                    return i;       
                 }
                 current = current.Next;
             }
@@ -175,9 +173,9 @@ namespace LinkedList
         public void ChangeElementData(object elementToChange, object newData)
         {
             Node current = head;
-            while (current != null)
+            while(current!=null)
             {
-                if (current.Data.Equals(elementToChange))
+                if(current.Data.Equals(elementToChange))
                 {
                     current.Data = newData;
                     break;
@@ -190,7 +188,7 @@ namespace LinkedList
         {
             Node current = head;
             int currentIndex = 0;
-            while (currentIndex < index)
+            while(currentIndex < index)
             {
                 current = current.Next;
                 currentIndex++;
@@ -201,8 +199,8 @@ namespace LinkedList
         public object GetElementData(int index)
         {
             Node current = head;
-            int currentIndex = 0;
-            while (currentIndex < index)
+            int currentIndex = 0;   
+            while(currentIndex < index)
             {
                 current = current.Next;
                 currentIndex++;
