@@ -91,74 +91,38 @@ namespace DoublyLinkedList
         {
             if (index < 0 || index > count)
                 throw new ArgumentOutOfRangeException("Index is out of range");
-            Node newNode = new Node(item); // syzdavame elementa, kojto shte vmykvame
-            int currentIndex = 0;
-            Node current = head;
-            Node prev = null; // tazi promenliva pazi predishniq element. Principno moje da se maxne ottuk(kakto i dolu v while-a)
-            // i da se zameni s current.Prev navsqkude kydeto se sreshta po-dolu. Tova moje da se napravi samo pri
-            // dvusvyzaniq spisuk zashtoto pri ednosvyrzaniq nqmame Prev, a samo Next
-            while (currentIndex < index)
+            Node newNode = new Node(item); 
+            if (index == 0)
             {
-                /* Ako imame spisyk s elementi 1 2 3 i iskame da vmyknem element na poziciq 1(mejdu 1 i 2)
-                 * prev shte e raven na 1, current shte e raven na 2, currentIndex shte e raven na 1
-                 */
-                prev = current;
-                current = current.Next;
-                currentIndex++;
-            }
-            if (index == 0) // ako poziciqta na koqto iskame da dobavim element e 0 (t.e predi vsichki elementi)
-            {
-                if (count == 0) // proverqvame dali spisyka e prazen, ako da dobavqme nov element izpolzvajki metoda napisan
-                // po-gore(Add) i s return prekratqvame izpylnenieto na InsertAt
+                if (count == 0)
                 {
                     this.Add(item);
                     return;
                 }
-                else // ako spisyka ne e bil prazen, a poziiciqta na koqto iskame da dobavim element e 0
-                // (t.e. predi vsichki elementi) vlizame tuk
+                else
                 {
-                    /*  newNode = 4, head = 1
-                 *     head.Prev      |             (1)                 (3)     head  |                (4)
-                 *         |          |              |                   |       |    |                 |
-                 *   null <--  1      |      null <-------- newNode <--------   1     |  null <----- newNode <------- 1
-                 *             |      |                         4    -------->        |                 4     ------->
-                 *           head     |                                  |            |
-                 *                    |                                 (2)           |
-                 */
-                    newNode.Prev = head.Prev; // (1)
-                    newNode.Next = head;      // (2)
-                    head.Prev = newNode;      // (3)
-                    head = newNode;           // (4)
+                    newNode.Prev = head.Prev;
+                    newNode.Next = head;
+                    head.Prev = newNode;
+                    head = newNode;
                 }
             }
-            else if (index == count) // ako poziciqta na koqto iskame da dobavim element e ravna na broq na elementite
-            // (t.e sled vsichki elementi) vlizame tuk 
-            {   /*  newNode = 4, tail = 3
-                 *     tail            |       tail newNode.Prev  |                tail
-                 *       |             |         |     |          |                 |
-                 *       3 --> null    |         3 <---- newNode  |        3 <-- newNode --> null 
-                 *         |           |            ---->   4     |           -->    4
-                 *       tail.Next     |              |           |
-                 *                     |          tail.Next       |
-                 */
+            else if (index == count)
+            {
                 newNode.Prev = tail;
                 tail.Next = newNode;
                 tail = newNode;
             }
-            else // ako poziciqta e mejdu elementite v spisyka(t.e. nito v nachaloto nito v kraq) vlizame tuk
+            else
             {
-                /*  newNode = 4, prev = 1, current = 2
-                 *     current.Prev      |               (1)               (2)    
-                 *         |             |                |                 |
-                 *   prev <-- current    |      prev  <-------- newNode <--------  current
-                 *     1  -->    2       |       1    -------->    4    -------->     2
-                 *         |             |                |                 |
-                 *       prev.Next       |               (4)               (3) 
-                 */
-                newNode.Prev = current.Prev; // (1)
-                current.Prev = newNode;      // (2)
-                newNode.Next = prev.Next;    // (3) newNode.Next = current.Prev.Next \___ pravqt sushtoto
-                prev.Next = newNode;         // (4) current.Prev.Next = newNode      /
+                Node current = head;
+                for (int i = 0; i < index; i++)
+                    current = current.Next;
+
+                newNode.Prev = current.Prev;
+                current.Prev = newNode;
+                newNode.Next = current.Prev.Next;
+                current.Prev.Next = newNode;
             }
             count++;
         }
@@ -167,60 +131,32 @@ namespace DoublyLinkedList
         {
             if (index < 0 || index >= count)
                 throw new ArgumentOutOfRangeException("Index is out of range");
-            int currentIndex = 0;
-            Node current = head;
-            Node prev = null;
-            while (currentIndex < index)
+            if (index == 0) 
             {
-                prev = current;
-                current = current.Next;
-                currentIndex++;
-            }
-            if (index == 0) // ako poziciqta na koqto iskame da premaxmen element e 0 (t.e 1viq element)
-            {
-                if (count == 1) // ako broq na elementite e raven na 1(toest sled premahvane na elementa na nuleva poziciq 
-                // spisyka stava prazen) vlizame tyk
+                if (count == 1)                
                 {
-                    // pravim glavata i opashkata null
                     head = null;
                     tail = null;
                 }
-                else // ako ne vlizame tuk
+                else 
                 {
-                    // premestvame glavata na sledvashtiq element i pravim Prev pointera mu da sochi kym null
-                    head = current.Next;
+                    head = head.Next;
                     head.Prev = null;
                 }
             }
-            else if (index == count - 1) // ako poziciqta e v kraq na spisuka(t.e. ako imame spisyk s 2 elementa, 2riq element 
-            // ima index raven na 1, koeto e count-1) vlizame tyk
+            else if (index == count - 1)
             {
-                /*  current = 2, prev = 3, tail = 2
-                *             tail      |     tail = prev                          
-                *               |       |        |                          
-                *   prev <-- current    |      prev  <-----current-------->  null 
-                *     3  -->    2       |       3   \         2             /    
-                *         |             |            \_____________________/                    
-                *         |             |                      |      
-                *       prev.Next       |             prev.Next = current.Next            
-                */
-                prev.Next = current.Next; // prev.Next = null - pravi sushtoto
-                tail = prev;
+                tail.Prev.Next = tail.Next; 
+                tail = tail.Prev;
             }
-            else // ako poziciqta e mejdu elementite v spisyka(t.e. nito v nachaloto nito v kraq) vlizame tuk
+            else 
             {
-                /*  prev = 2, current = 3, current.Next = 4
-                *      current.Prev     |              current.Next.Prev = prev;                                     
-                *         |             |           ___________|_____________ 
-                *         |             |          /                         \
-                *   prev <-- current    |      prev  <-----current       current.Next
-                *     2  -->    3       |       2  \         3     -------->  4 
-                *         |             |           \________________________/                    
-                *         |             |                      |      
-                *       prev.Next       |           prev.Next = current.Next            
-                */
-                prev.Next = current.Next;
-                current.Next.Prev = prev;
+                Node current = head;
+                for (int i = 0; i < index; i++)
+                    current = current.Next;
+
+                current.Prev.Next = current.Next;
+                current.Next.Prev = current.Prev;
             }
             count--;
         }
@@ -244,43 +180,44 @@ namespace DoublyLinkedList
         }
         */
 
-        public void Remove(object item) /* Metod za premahvane na obekt po st-st. Povecheto neshta sa vzaimstvani ot metoda
-                                         * RemoveAt, zatova spored men zakomentiraniq metod Remove po-gore e po-udachniq variant*/
+        public void Remove(object item) 
         {
-            Node current = head;
-            Node prev = null;
             int itemIndex = 0;
-            while (!current.Data.Equals(item)) // Neshtata v while-a se izpylnqvat dokato stoinostta na segashniq element e 
-            // razlichna ot tazi na elementa kojto iskame da premahnem 
+            Node current = head;
+            for (int i = 0; i < count; i++)
             {
-                prev = current;
+                if (current.Data.Equals(item))
+                {
+                    if (itemIndex == 0)
+                    {
+                        if (count == 1)
+                        {
+                            head = null;
+                            tail = null;
+                        }
+                        else
+                        {
+                            head = current.Next;
+                            head.Prev = null;
+                        }
+                    }
+                    else if (itemIndex == count - 1)
+                    {
+                        current.Prev.Next = current.Next;
+                        tail = current.Prev;
+                    }
+                    else
+                    {
+                        current.Prev.Next = current.Next;
+                        current.Next.Prev = current.Prev;
+                    }
+                    count--;
+                    return;
+                }
                 current = current.Next;
                 itemIndex++;
             }
-            if (itemIndex == 0)
-            {
-                if (count == 1)
-                {
-                    head = null;
-                    tail = null;
-                }
-                else
-                {
-                    head = current.Next;
-                    head.Prev = null;
-                }
-            }
-            else if (itemIndex == count - 1)
-            {
-                prev.Next = current.Next;
-                tail = prev;
-            }
-            else
-            {
-                prev.Next = current.Next;
-                current.Next.Prev = prev;
-            }
-            count--;
+            throw new ArgumentException("There is no such item!");
         }
 
         public void Print()
