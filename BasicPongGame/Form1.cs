@@ -22,14 +22,14 @@ namespace BasicPongGame
         Size sizeAI = new Size(25, 100);
         Size sizeBall = new Size(20, 20);
 
+        Random setSpeed = new Random();
         int ballSpeedX = 6;
         int ballSpeedY = 6;
         int gameTimeInterval = 1;
         int playerPoints = 0;
         int computerPoints = 0;
         int aiSpeed = 0;
-        Random setSpeed = new Random();
-
+       
         public Form1()
         {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace BasicPongGame
             this.Controls.Add(picBoxBall);
         }
 
-        private void gameTime_Tick(object sender, EventArgs e)
+        public void gameTime_Tick(object sender, EventArgs e)
         {
             picBoxBall.Location = new Point(picBoxBall.Location.X + ballSpeedX, picBoxBall.Location.Y + ballSpeedY);
             gameAreaCollisions();
@@ -141,7 +141,7 @@ namespace BasicPongGame
         {
             if (picBoxBall.Location.Y > ClientSize.Height - picBoxBall.Height || picBoxBall.Location.Y < 0)
             {
-                ballSpeedY = -ballSpeedY; 
+                ballSpeedY = -ballSpeedY;
             }
             if ((picBoxBall.Location.X > ClientSize.Width || picBoxBall.Location.X < 0) && checkForWinner() != true)
             {
@@ -184,7 +184,7 @@ namespace BasicPongGame
         {
             if (a == true)
             {
-                picBoxBall.Location = new Point(ClientSize.Width / 2 - picBoxBall.Width / 2, ClientSize.Height / 2 - picBoxBall.Height / 2);
+                picBoxBall.Location = new Point(ClientSize.Width / 2 - picBoxBall.Width / 2, (ClientSize.Height-setSpeed.Next(10,550))  - picBoxBall.Height / 2);
                 ballSpeedX = -ballSpeedX;
             }
         }  

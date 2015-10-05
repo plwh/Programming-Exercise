@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test1", "Test1\Test1.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicPongGame", "BasicPongGame\BasicPongGame.csproj", "{7092F5A2-A666-4F49-96A4-917F7B3F1C5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeGame", "SnakeGame\SnakeGame.csproj", "{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,12 @@ Global
 		{7092F5A2-A666-4F49-96A4-917F7B3F1C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7092F5A2-A666-4F49-96A4-917F7B3F1C5D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7092F5A2-A666-4F49-96A4-917F7B3F1C5D}.Release|Win32.ActiveCfg = Release|Any CPU
+		{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B2D3CDD-0686-4F7C-8E55-66AA5903EFE9}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
