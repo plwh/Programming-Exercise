@@ -10,9 +10,9 @@ namespace Arrays
     {
         public static int[] Merge(int[] a, int[] b)
         {
-            int[] result = new int[a.Length + b.Length];
             int i = 0, j = 0, k = 0;
-            while(i < a.Length && j < b.Length)
+            int[] result = new int[a.Length + b.Length];
+            while (i < a.Length && j < b.Length)
             {
                 if (a[i] < b[j])
                 {
@@ -40,11 +40,11 @@ namespace Arrays
             }
             return result;
         }
-        
+
         static void Main(string[] args)
         {
-            int[] firstArray = new int[5]{ 2, 6, 10, 17, 20 };
-            int[] secondArray = new int[4] { 4, 8, 12, 18};
+            int[] firstArray = new int[4]{ 1, 3, 5, 7};
+            int[] secondArray = new int[4] { 2, 4, 6, 8};
             int[] thirdArray = Merge(firstArray,secondArray);
             foreach (int i in thirdArray)
             {

@@ -9,21 +9,22 @@ namespace SortingArrayAlgorithm
     class BubbleSort
     {
         public static int[] BubbleSortAlgorithm(int[] array)
-        {
-            for (int i = array.Length - 1; i >= 0; i--)
+        { 
+            for(int j=array.Length-1;j>=0;j--)
             {
-                for (int j = 1; j < array.Length; j++)
+                for (int i = 1; i < array.Length;i++)
                 {
-                    if(array[j-1] > array[j])
+                    if(array[i-1] > array[i])
                     {
-                        int temp = array[j - 1];
-                        array[j - 1] = array[j];
-                        array[j] = temp;
+                        int temp = array[i - 1];
+                        array[i - 1] = array[i];
+                        array[i] = temp;
                     }
                 }
             }
             return array;
         }
+
         static void Main(string[] args)
         {
             int[] arr = new int[4] { 4, 3, 1, 8 };

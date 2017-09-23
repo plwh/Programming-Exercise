@@ -30,8 +30,8 @@ namespace DoublyLinkedList
 
             public object Data
             {
-                get { return this.data; }
-                set { this.data = value; }
+                get { return this.data;}
+                set { this.data = value;}
             }
 
             public Node Next
@@ -44,22 +44,18 @@ namespace DoublyLinkedList
             {
                 get { return this.prev; }
                 set { this.prev = value; }
-            }
-
-            public override string ToString()
-            {
-                return this.Data.ToString();
-            }
+            }   
         }
+
+        private int count;
         private Node head;
         private Node tail;
-        private int count;
 
         public DoublyLinkedList()
         {
+            this.count = 0;
             this.head = null;
             this.tail = null;
-            this.count = 0;
         }
 
         public int Count
@@ -90,8 +86,8 @@ namespace DoublyLinkedList
         public void InsertAt(int index, object item)
         {
             if (index < 0 || index > count)
-                throw new ArgumentOutOfRangeException("Index is out of range");
-            Node newNode = new Node(item); 
+                throw new ArgumentOutOfRangeException("Out of range");
+            Node newNode = new Node(item);
             if (index == 0)
             {
                 if (count == 0)
@@ -117,8 +113,9 @@ namespace DoublyLinkedList
             {
                 Node current = head;
                 for (int i = 0; i < index; i++)
+                {
                     current = current.Next;
-
+                }
                 newNode.Prev = current.Prev;
                 current.Prev = newNode;
                 newNode.Next = current.Prev.Next;
@@ -130,15 +127,15 @@ namespace DoublyLinkedList
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= count)
-                throw new ArgumentOutOfRangeException("Index is out of range");
-            if (index == 0) 
+                throw new ArgumentOutOfRangeException("Out of range");
+            if (index == 0)
             {
-                if (count == 1)                
+                if (count == 1)
                 {
                     head = null;
                     tail = null;
                 }
-                else 
+                else
                 {
                     head = head.Next;
                     head.Prev = null;
@@ -146,10 +143,10 @@ namespace DoublyLinkedList
             }
             else if (index == count - 1)
             {
-                tail.Prev.Next = tail.Next; 
+                tail.Prev.Next = tail.Next;
                 tail = tail.Prev;
             }
-            else 
+            else
             {
                 Node current = head;
                 for (int i = 0; i < index; i++)
@@ -160,7 +157,6 @@ namespace DoublyLinkedList
             }
             count--;
         }
-
         /* - Alternativna versiq na metoda Remove napisan po-dolu, izpolzvaiki metoda RemoveAt, napisan po-gore
         public void Remove(object item)
         {
@@ -245,15 +241,7 @@ namespace DoublyLinkedList
 
         public bool Contains(object item)
         {
-            Node current = head;
-            while (current != null)
-            {
-                if (current.Data.Equals(item))
-                    return true;
-
-                current = current.Next;
-            }
-            return false;
+            return IndexOf(item) != -1;
         }
 
         public void ChangeElementData(object elementToChange, object newData)
@@ -273,11 +261,9 @@ namespace DoublyLinkedList
         public void ChangeDataAtIndex(int index, object newData)
         {
             Node current = head;
-            int currentIndex = 0;
-            while (currentIndex < index)
+            for (int i = 0; i < index; i++)
             {
                 current = current.Next;
-                currentIndex++;
             }
             current.Data = newData;
         }

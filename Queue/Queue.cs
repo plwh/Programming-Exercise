@@ -25,7 +25,7 @@ namespace Queue
                 prevNode.next = this;
             }
 
-            public object Data 
+            public object Data
             {
                 get { return this.data; }
                 set { this.data = value; }
@@ -82,7 +82,7 @@ namespace Queue
         }
 
         public void Clear()
-        { 
+        {
             this.head = null;
             this.tail = null;
             this.count = 0;
@@ -102,6 +102,7 @@ namespace Queue
             }
             return false;
         }
+
         public void PrintQueue()
         {
             Node current = head;
@@ -122,17 +123,7 @@ namespace Queue
             test.Enqueue(3);
             test.Enqueue(4);
             test.Dequeue();
-            test.PrintQueue();
-            Console.WriteLine("*****************");
-            Queue<int> test1 = new Queue<int>();
-            test1.Enqueue(2);
-            test1.Enqueue(3);
-            test1.Enqueue(4);
-            test1.Dequeue();
-            foreach (int i in test1)
-            {
-                Console.WriteLine(i);
-            }
+            test.PrintQueue();          
         }
     }
 }

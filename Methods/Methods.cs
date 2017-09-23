@@ -6,14 +6,25 @@ using System.Threading.Tasks;
 
 namespace Methods
 {
-    class Methods
+    public class StaticMethodsTests
     {
-        static void PrintArray(int[]arr)
+        public class Methods
         {
-            foreach (int i in arr)
+            public void PrintTheArray(int[] arr)
             {
-                Console.WriteLine(i);
-            } 
+                foreach (int i in arr)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+
+            public static void PrintArray(int[] arr)
+            {
+                foreach (int i in arr)
+                {
+                    Console.WriteLine(i);
+                }
+            }
         }
 
         static void Main(string[] args)
@@ -24,10 +35,13 @@ namespace Methods
                 Console.Write("arr[{0}]:", i);
                 array[i] = int.Parse(Console.ReadLine());
             }
-            PrintArray(array);
+            Methods a = new Methods();
+            a.PrintTheArray(array);
+            Console.WriteLine();
+            Methods.PrintArray(array);
             Array.Sort(array);
             Console.WriteLine();
-            PrintArray(array);
+            Methods.PrintArray(array);
         }
     }
 }

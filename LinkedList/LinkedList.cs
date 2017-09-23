@@ -10,32 +10,23 @@ namespace LinkedList
     {
         private class Node
         {
-            private object data;
-            private Node next;
 
             public Node(object data)
             {
-                this.data = data;
-                this.next = null;
+                this.Data = data;
+                this.Next = null;
             }
 
             public Node(object data, Node prevNode)
             {
-                this.data = data;
-                prevNode.next = this;
+                this.Data = data;
+                prevNode.Next = this;
             }
 
-            public object Data
-            {
-                get { return this.data; }
-                set { this.data = value; }
-            }
+            public object Data { get; set; }
 
-            public Node Next
-            {
-                get { return this.next; }
-                set { this.next = value; }
-            }
+            public Node Next { get; set; }
+           
         }
         private Node head;
         private Node tail;
@@ -75,28 +66,21 @@ namespace LinkedList
 
         public void InsertAt(int index, object item)
         {
-            if (index > count || index < 0)
-                throw new ArgumentOutOfRangeException("Index is out of range");
+            if (index < 0 || index > count)
+                throw new ArgumentOutOfRangeException("Out of range");
             Node newNode = new Node(item);
-            int currentIndex = 0;
-            Node current = head;
-            Node prev = null;
-            while (currentIndex < index)
+            if (index == 0)
             {
-                prev = current;
-                current = current.Next;
-                currentIndex++;
-            }       
-            if(count == 0)
-            {
-                head = newNode;
-                tail = head;
-            }
-            else if (index == 0)
-            {
-                var temp = head;
-                head = newNode;
-                head.Next = temp;
+                if (count == 0)
+                {
+                    this.Add(item);
+                    return;
+                }
+                else
+                {
+                    newNode.Next = head;
+                    head = newNode;
+                }
             }
             else if (index == count)
             {
@@ -105,32 +89,30 @@ namespace LinkedList
             }
             else
             {
-                newNode.Next = prev.Next;
+                Node current = head;
+                Node prev = null;
+                for (int i = 0; i < index; i++)
+                {
+                    prev = current;
+                    current = current.Next;
+                }
                 prev.Next = newNode;
+                newNode.Next = current;
             }
             count++;
         }
 
         public void RemoveAt(int index)
         {
-            if (index >= count || index < 0)
+            if (index < 0 || index >= count)
             {
-                throw new ArgumentOutOfRangeException("Index is out of range");   
-            }
-            int currentIndex = 0;
-            Node current = head;
-            Node prev = null;
-            while (currentIndex < index)
-            {
-                prev = current;
-                current = current.Next;
-                currentIndex++;
+                throw new ArgumentOutOfRangeException("Out of range");
             }
             if (index == 0)
             {
                 if (count == 1)
                 {
-                    head = head.Next;
+                    head = null;
                     tail = null;
                 }
                 else
@@ -138,18 +120,28 @@ namespace LinkedList
                     head = head.Next;
                 }
             }
-            else if (index == count-1)
-            {
-                prev.Next = current.Next;
-                tail = prev;
-                current = null;
-            }
             else
             {
-                prev.Next = current.Next;
+                Node current = head;
+                Node prev = null;
+                for (int i = 0; i < index; i++)
+                {
+                    prev = current;
+                    current = current.Next;
+                }
+                if (index == count - 1)
+                {
+                    prev.Next = current.Next;
+                    tail = prev;
+                }
+                else
+                {
+                    prev.Next = current.Next;
+                }
             }
             count--;
         }
+        
 
         public int IndexOf(object item)
         {
@@ -223,27 +215,10 @@ namespace LinkedList
         {
             LinkedList test = new LinkedList();
             test.InsertAt(0, 1);
-            test.InsertAt(1, 2);
-            test.Add(3);
-            Console.WriteLine("List elements:");
+            test.InsertAt(1, 3);
+            test.Add(5);
+            test.InsertAt(1, 6);
             test.Print();
-            test.RemoveAt(0);
-            Console.WriteLine("List elements after removing element at index 0:");
-            test.Print();
-            test.InsertAt(2, 4);
-            Console.WriteLine("List elements after inserting an element at index 2(after the last element):");
-            test.Print();
-            Console.WriteLine("List elements after changing element data at index 1 with '5':");
-            test.ChangeDataAtIndex(1, 5);
-            test.Print();
-            Console.WriteLine("List elements after changing element with value '2' to '3':");
-            test.ChangeElementData(2, 3);
-            test.Print();
-            object element = test.GetElementData(1);
-            Console.WriteLine("Value of element at index 1:" + element);
-            Console.WriteLine("Index of element with value 3:{0}", test.IndexOf(3));
-            Console.WriteLine("List contains element with value = '5': {0}", (test.Contains(5)) ? "Yes" : "No");
-            Console.WriteLine("Is list empty? - {0}", (test.IsEmpty) ? "Yes" : "No");
         }
     }
 }
