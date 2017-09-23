@@ -10,7 +10,7 @@ namespace AbstractMethod
     {
         public void PrintInfo()
         {
-            Console.WriteLine("I am a {0}.", this.GetType().Name);
+            Console.WriteLine("I am {0}.", this.GetType().Name);
             Console.WriteLine(GetTypicalSound());
         }
         protected abstract String GetTypicalSound();

@@ -30,7 +30,7 @@ public class Palindrome
             }
 
             // Scan backward for b while invalid.
-                    while (!char.IsLetterOrDigit(b))
+            while (!char.IsLetterOrDigit(b))
             {
                 max--;
                 if (min > max)
@@ -47,11 +47,11 @@ public class Palindrome
             min++;
             max--;
         }
-    } 
+    }
 
 
     public static void Main(string[] args)
     {
-        Console.WriteLine(IsPalindrome("A Toyota. Race fast, safe car. A Toyota.")?"Yes":"No");
+        Console.WriteLine(IsPalindrome("A Toyota. Race fast, safe car. A Toyota."));
     }
-}                                                                                                                                    
+}

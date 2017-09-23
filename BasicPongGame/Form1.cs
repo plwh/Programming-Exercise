@@ -23,7 +23,6 @@ namespace BasicPongGame
         Size sizeBall = new Size(20, 20);
 
         Random setSpeed = new Random();
-        Random speedIncrease = new Random();
         int ballSpeedX = 6;
         int ballSpeedY = 6;
         int gameTimeInterval = 1;
@@ -68,7 +67,7 @@ namespace BasicPongGame
 
         public void gameTime_Tick(object sender, EventArgs e)
         {
-            picBoxBall.Location = new Point(picBoxBall.Location.X + ballSpeedX*Convert.ToInt32(speedIncrease.Next(1,2)), picBoxBall.Location.Y + ballSpeedY*Convert.ToInt32(speedIncrease.Next(1,2)));
+            picBoxBall.Location = new Point(picBoxBall.Location.X + ballSpeedX, picBoxBall.Location.Y + ballSpeedY);
             gameAreaCollisions();
             paddleCollision();
             playerMovement();
@@ -158,6 +157,7 @@ namespace BasicPongGame
             { 
                 label1.Visible = false;
                 label2.Visible = false;
+                lineShape1.Visible = false;
                 textBox1.Visible = true;
                 label3.Visible = true;
                 aiSpeed = 0;

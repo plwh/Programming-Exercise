@@ -14,11 +14,11 @@ namespace MethodOverride
         }
     }
 
-    public class DC : BC 
+    public class DC : BC
     {
         public override string Display()
         {
-            return base.Display() + " World!";
+            return base.Display() + " Angel";
         }
     }
 
@@ -28,9 +28,11 @@ namespace MethodOverride
         {
             BC b;
             b = new BC();
-            Console.WriteLine(b.Display());
+            string str = b.Display();
             b = new DC();
-            Console.WriteLine(b.Display());      
+            string str1 = b.Display();
+            Console.WriteLine(str);
+            Console.WriteLine(str1);
         }
     }
 }

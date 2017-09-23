@@ -10,10 +10,12 @@ namespace IsArraySymmetrical
     {
         public static bool IsArraySymmetrical(int[] array)
         {
-            for (int i = 0; i < array.Length / 2; i++)
+            for (int i = 0; i < array.Length / 2;i++)
             {
-                if (array[i] != array[array.Length - i - 1])
-                return false;
+                if(array[i] != array[array.Length-i-1])
+                {
+                    return false;
+                }
             }
             return true;
         }

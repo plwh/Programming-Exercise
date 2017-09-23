@@ -21,8 +21,8 @@ namespace ConsoleApplication1
 
             public object Data
             {
-                get { return this.data;}
-                set { this.data = value;}
+                get { return this.data; }
+                set { this.data = value; }
             }
 
             public Node Next
@@ -43,19 +43,20 @@ namespace ConsoleApplication1
 
         public int Count
         {
-            get { return count; }
+            get { return this.count; }
         }
 
         public void Push(object item)
         {
+            Node newNode = new Node(item);
             if (top == null)
             {
-                top = new Node(item);
+                top = newNode;
             }
             else
             {
                 Node temp = top;
-                top = new Node(item);
+                top = newNode;
                 top.Next = temp;
             }
             count++;
